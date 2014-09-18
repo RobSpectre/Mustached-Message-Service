@@ -14,7 +14,7 @@ body, html {
 }
 
 #header .section-heading {
-    line-height: 68px;
+    line-height: 128px;
     margin: 0;
     padding: 0 0 0 233px;
     font-family: 'Helvetica',sans-serif;
@@ -22,7 +22,7 @@ body, html {
     font-weight: 100;
     color: #FFF;
     text-align: center;
-    background: url("//static0.twilio.com/packages/twilio-conference/img/twilio-logo-2012-header.png") no-repeat 148px center;
+    background: url("/static/images/twilio_logo_128x128.png") no-repeat 148px center;
 }
 
 #content {
