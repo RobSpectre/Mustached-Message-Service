@@ -30,7 +30,7 @@ class TwiMLTest(unittest.TestCase):
             'FromCountry': 'US',
             'FromZip': '55555'}
         if extra_params:
-            params = dict(params.items() + extra_params.items())
+            params = dict(list(params.items()) + list(extra_params.items()))
         return self.app.post(url, data=params)
 
     def call(self, url='/voice', to=app.config['TWILIO_CALLER_ID'],
@@ -49,15 +49,34 @@ class TwiMLTest(unittest.TestCase):
         if digits:
             params['Digits'] = digits
         if extra_params:
-            params = dict(params.items() + extra_params.items())
+            params = dict(list(params.items()) + list(extra_params.items()))
         return self.app.post(url, data=params)
 
 
 class ExampleTests(TwiMLTest):
-    def test_sms(self):
-        response = self.sms("Test")
-        self.assertTwiML(response)
-
     def test_voice(self):
         response = self.call()
         self.assertTwiML(response)
+
+
+class MustacheTests(TwiMLTest):
+    def test_no_photo(self):
+        response = self.sms("Testing.", extra_params={'NumMedia': '0'})
+        self.assertTwiML(response)
+        self.assertTrue(b'<Message>' in response.data, "Did not find a help "
+                        "message in response: {0}".format(response.data))
+        self.assertFalse(b'<Media>' in response.data, "Found a <Media> noun "
+                        "in help message: {0}".format(response.data))
+
+    def test_photo(self):
+        response = self.sms("Testing", extra_params={
+                            'MediaUrl0': "http://example.com/pic.png",
+                            'NumMedia': '1'})
+        self.assertTwiML(response)
+        self.assertTrue(b'<Media>' in response.data, "Did not return stashed "
+                        "photo: {0}".format(response.data))
+        self.assertTrue(b'<Body>' in response.data, "Did not return message "
+                        "with stash: {0}".format(response.data))
+        self.assertTrue(b'<Message>' in response.data, "Did not return loading"
+                        " message with stash response: "
+                        "{0}".format(response.data))
