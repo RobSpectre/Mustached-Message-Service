@@ -1,17 +1,18 @@
 {
-    "name": "Twilio Hackpack for Python",
-    "description": "The fastest way to start using Twilio with Python.  Based on Flask microwebframework.",
+    "name": "Mustached Message Service",
+    "description": "A Flask app demonstrating Twilio MMS through facial recognition/hair.",
     "keywords": [
         "twilio",
         "flask",
         "python",
         "web",
         "SMS",
-        "voice"
+        "voice",
+        "mustaches"
     ],
     "website": "http://www.twilio.com",
-    "repository": "https://github.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask",
-    "logo": "https://www.twilio.com/packages/company/img/logos_downloadable_round.png",
+    "repository": "https://github.com/RobSpectre/Mustached-Message-Service",
+    "logo": "http://lh3.googleusercontent.com/aspZ3EKof3Ku-VbhrDXpZZ4yQeNhAc-cpCnaWDZq3KXI4GmH2jInIMkWy52GjWsLaU2KEsV6w4n3TpP7c4OV9weMMxQodbEOCw7XyaxaMIJCdppeiEUrkTqyp-MNaW1peg",
     "env": {
         "TWILIO_ACCOUNT_SID": {
             "description": "Your Twilio account's unique identifier, found here: https://www.twilio.com/user/account",

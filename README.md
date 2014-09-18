@@ -1,107 +1,36 @@
-# Twilio Hackpack for Heroku and Flask
+# Mustached Message Service 
 
-An easy-to-use repo to kickstart your Twilio app using Flask and deploy onto
-Heroku.  Easy to clone, easy to tweak, easy to deploy.
+A Flask app demonstrating [Twilio MMS](http://www.twilio.com/mms) through facial recognition/hair.
+
+See it by sending a selfie to one of these numbers!
+
+* US - (646) 846-8238
+* Canada - (438) 793-8863
 
 [![Build
-Status](https://secure.travis-ci.org/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask.png)]
-(http://travis-ci.org/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask)
-[![Coverage Status](https://coveralls.io/repos/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask/badge.png)]
-(https://coveralls.io/r/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask)
+Status](https://secure.travis-ci.org/RobSpectre/Mustached-Message-Service.png)]
+(http://travis-ci.org/RobSpectre/Mustached-Message-Service)
+[![Coverage Status](https://coveralls.io/repos/RobSpectre/Mustached-Message-Service/badge.png)]
+(https://coveralls.io/r/RobSpectre/Mustached-Message-Service)
 
 
 Deploy this hackpack to Heroku now!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/RobSpectre/Mustached-Message-Service)
 
-
-## Features
-
-Look at all these crazy features!
-
-* [Twilio Client](http://www.twilio.com/api/client) - This hackpack ships 
-  with a base Jinja2 template for Twilio Client already configured and ready to
-  call.  
-* Automagic Configuration - Just run `python configure.py --account_sid ACxxxx --auth_token yyyyy` 
-  and the hackpack configures Twilio and Heroku for you.
-* Production Ready - The [production branch](https://github.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask/tree/production)
-  features a few more settings and dependencies to make the hackpack ready to
-  put into live service.
-* Plug-and-Play - Procfile, requirements.txt and Makefile make installation
-  and usage a breeze.
-* Boilerplate - All the Flask app boilerplate with example Voice and SMS 
-  Request URLs ready for use on Twilio.
-* Testing - Easy base class for unit testing with example tests, tox ready.
-* PEP8 - It's good for you!
-* Python 2 and 3 - It's better for you!
 
 
 ## Usage
 
-This hackpack ships with two ready-to-go endpoints for your Twilio Voice and SMS
+This hack ships with two ready-to-go endpoints for your Twilio Voice and SMS
 apps.  The two routes /voice and /sms contain two examples you can modify
 easily.
 
 To start tweaking your hackpack, just edit `hackpack/app.py`.
 
-For example, here is a quick Twilio Voice app that plays some Ramones.
+To give it a try, configure your Twilio number's Messaging Request URL to the
+`/sms` endpoint.
 
-```python
-@app.route('/voice', methods=['POST'])
-def voice():
-    response = twiml.Response()
-    response.play("http://example.com/music/ramones.mp3")
-    return str(response)
-```
-
-SMS apps are similarly easy.
-
-```python
-@app.route('/sms', methods=['POST'])
-def sms():
-    response = twiml.Response()
-    response.sms("The Ramones are great!")
-    return str(response)
-```
-
-These apps can get interactive pretty quickly.  For example, let's make an SMS
-app that responds with "Best band ever" when you text RAMONES.
-
-```python
-@app.route('/sms', methods=['POST'])
-def sms():
-    response = twiml.Response()
-    body = request.form['Body']
-    if "RAMONES" in body:
-        response.sms("Best band ever.")
-    else:
-        response.sms("Not the best band ever.")
-    return str(response)
-```
-
-You can apply this same concept to
-[Gathering](http://www.twilio.com/docs/api/twiml/gather) user input on Twilio
-Voice.  Here we will Gather the user input with one route and then handle the
-user input with another.
-
-```python
-@app.route('/voice', methods=['POST'])
-def voice():
-    response = twiml.Response()
-    with response.gather(numDigits=1, action="/gather") as gather:
-        gather.say("Press 1 to indicate The Ramones are the best band ever.")
-    return str(response)
-
-@app.route('/gather', methods=['POST'])
-def gather():
-    response = twiml.Response()
-    digits = request.form['Digits']
-    if digits == "1":
-        response.say("You are correct.  The Ramones are the best.")
-    else:
-        response.say("You are wrong.  Never call me again.")
-    return str(response)
-```
 
 ## Installation
 
@@ -111,13 +40,13 @@ Step-by-step on how to deploy, configure and develop on this hackpack.
 
 Use Heroku to deploy this hackpack immediately:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/RobSpectre/Mustached-Message-Service)
 
 ### Getting Started 
 
 1) Grab latest source
 <pre>
-git clone git://github.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask.git 
+git clone git://github.com/RobSpectre/Mustached-Message-Service.git 
 </pre>
 
 2) Navigate to folder and create new Heroku Cedar app
@@ -295,11 +224,11 @@ hackpack.
 * [Oscar](http://labcoder.com/) - Bug fix for user input
 * [Zachary
   Woase](http://zacharyvoase.com/) - [Twilio signature
-  validation](https://github.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask/pull/7) for production branch.
+  validation](https://github.com/RobSpectre/Mustached-Message-Service/pull/7) for production branch.
 * [Kevin Burke](http://www.twentymilliseconds.com/) - Better FTU for Twilio
   Client.
 
 
 [![githalytics.com
 alpha](https://cruel-carlota.pagodabox.com/33a5ddd61dd29dd933422bca2b3dfa0e
-"githalytics.com")](http://githalytics.com/RobSpectre/Twilio-Hackpack-for-Heroku-and-Flask)
+"githalytics.com")](http://githalytics.com/RobSpectre/Mustached-Message-Service)
